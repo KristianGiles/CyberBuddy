@@ -1,0 +1,26 @@
+## Authors: Kristian Giles & Caleb Prince
+## Start Date: 16/03/2025
+## Last Update: 17/03/2025
+## Version Number: 0.2
+
+import argparse
+
+#Initialising parser
+parser = argparse.ArgumentParser(
+    prog='CyberBuddy',
+    description='A collation of CyberSecurity Utilities'
+)
+
+#Initialising arguments
+parser.add_argument('-p', '--port', help='Starts up the port scanner, scanning on the specified IP Address, if no IP Address is specified it will scan on your local IP Address, the results of this scan are then outputted.')
+parser.add_argument('-i', '--ids', help='Starts up the IDS which will monitor network traffic and alert on suspicious behaviour in perpetuity until stopped.')
+parser.add_argument('-s', '--sniffer', help='Starts up a packet sniffer which will analyse flowing packets.')
+parser.add_argument('-e', '--encryption', help='Requires an encryption algorithm to be specified, currently supported algorithms TBD')
+parser.add_argument('-d', '--decryption', help='Requires a key file to be specified')
+parser.add_argument('-a', '--hash', help='Requires a hashing algorithm to be specified, currently supported algorithms TBD')
+parser.add_argument('-pm', '--password_manager', help='Opens up the CLI to interface with the password manager backend.')
+parser.add_argument('-f', '--file', help='Allows a file to be passed in through stdin')
+parser.add_argument('-m', '--malware', help='Analyses malware that is passed in through stdin')
+
+#Creating args Namespace object
+args = parser.parse_args()
