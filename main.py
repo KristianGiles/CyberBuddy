@@ -8,7 +8,7 @@ import argparse
 #Initialising parser
 parser = argparse.ArgumentParser(
     prog='CyberBuddy',
-    description='A collation of CyberSecurity Utilities'
+    description='A collation of Cyber Security Utilities'
 )
 
 #Initialising arguments
