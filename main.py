@@ -24,10 +24,10 @@ parser.add_argument('-a', '--hash', help='Requires a hashing algorithm to be spe
 parser.add_argument('-pm', '--password_manager', action="store_true", help='Opens up the CLI to interface with the password manager backend.')
 parser.add_argument('-f', '--file', help='Allows a file to be passed in through stdin')
 parser.add_argument('-m', '--malware', help='Analyses malware that is passed in through stdin')
-parser.add_argument('-hp', '--honeypot', help='Starts up a honeypot.')
-parser.add_argument('-v', '--vuln', help='Perform a vulnerability scan on a given IP Address')
+parser.add_argument('-hp', '--honeypot', help='Starts up a Honeypot')
+parser.add_argument('-v', '--vuln', help='Starts up a vulnerability scanner.')
 parser.add_argument('-k', '--keylogger', help='Begin a keylogger.')
-parser.add_argument('-pst', '--strength', help='Perform a strength test on a given password.')
+parser.add_argument('-pst', '--strength', help='Allows a password to be passed in and will give it a scoring')
 
 #Creating args Namespace object
 args = parser.parse_args()
