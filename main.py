@@ -28,10 +28,6 @@ parser.add_argument('-hp', '--honeypot', help='Starts up a Honeypot')
 parser.add_argument('-v', '--vuln', help='Starts up a vulnerability scanner.')
 parser.add_argument('-k', '--keylogger', help='Begin a keylogger.')
 parser.add_argument('-pst', '--strength', help='Allows a password to be passed in and will give it a scoring')
-parser.add_argument('-hp', '--honeypot', help='Starts up a honeypot.')
-parser.add_argument('-v', '--vuln', help='Perform a vulnerability scan on a given IP Address')
-parser.add_argument('-k', '--keylogger', help='Begin a keylogger.')
-parser.add_argument('-pst', '--strength', help='Perform a strength test on a given password.')
 
 #Creating args Namespace object
 args = parser.parse_args()
