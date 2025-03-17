@@ -1,3 +1,4 @@
 argparse
 pytest
 psycopg2
+python-nmap

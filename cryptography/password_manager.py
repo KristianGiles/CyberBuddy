@@ -2,11 +2,14 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import getpass
 
+# Allows user to input username and password from the command line.
 def get_creds():
     username = input('Username: ')
     password = getpass.getpass('Password: ')
 
     return username, password
+
+# Using the specified username and password 
 def try_connect(username, password):
     try:
         connection = psycopg2.connect(
