@@ -4,6 +4,9 @@
 ## Version Number: 0.3
 
 import argparse
+import getpass
+
+from cryptography.password_manager import get_creds, try_connect
 
 #Initialising parser
 parser = argparse.ArgumentParser(
@@ -18,7 +21,7 @@ parser.add_argument('-s', '--sniffer', help='Starts up a packet sniffer which wi
 parser.add_argument('-e', '--encryption', help='Requires an encryption algorithm to be specified, currently supported algorithms TBD')
 parser.add_argument('-d', '--decryption', help='Requires a key file to be specified')
 parser.add_argument('-a', '--hash', help='Requires a hashing algorithm to be specified, currently supported algorithms TBD')
-parser.add_argument('-pm', '--password_manager', help='Opens up the CLI to interface with the password manager backend.')
+parser.add_argument('-pm', '--password_manager', action="store_true", help='Opens up the CLI to interface with the password manager backend.')
 parser.add_argument('-f', '--file', help='Allows a file to be passed in through stdin')
 parser.add_argument('-m', '--malware', help='Analyses malware that is passed in through stdin')
 parser.add_argument('-hp', '--honeypot', help='Starts up a honeypot.')
@@ -28,3 +31,7 @@ parser.add_argument('-pst', '--strength', help='Perform a strength test on a giv
 
 #Creating args Namespace object
 args = parser.parse_args()
+
+if args.password_manager == True:
+    username, password = get_creds()
+    connection = try_connect(username, password)
