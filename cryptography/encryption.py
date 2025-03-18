@@ -1,51 +1,72 @@
-#Importing the Fernet module from the cryptography library
-from cryptography import Fernet
+from cryptography.fernet import Fernet #pip3 install cryptography
 
-#Fernet is a symmetric encryption algorithm that is used for secure messaging
-#LIMITATIONS: files must fit in available memory to be able to be encrypted/decrypted
+print("        *****        ")
+print("      *       *      ")
+print("    *  ^     ^  *    ")
+print("   *     \\_/     *   ")
+print("   *             *   ")
+print("    *           *    ")
+print("      *       *      ")
+print("        *****        ")
+print("      /       \\      ")
+print("     / WELCOME \\     ")
+print("    /___________\\    ")
+print("        O||O          ")
+print("         ||           ")
+print("         \/           ")
+print("\nWelcome to CyberBuddy's File Encryption Program!\n")
 
-print("       *****       ")
-print("     *       *     ")
-print("    *  O   O  *    ")
-print("    *    ∆    *    ")
-print("    *  \\___/  *    ")
-print("     *       *     ")
-print("       *****       ")
-print("Welcome to CyberBuddy's File Encryption Program!\n")
-
-#User will upload file to be encrypred or run the program against a file to encrypt
-    #Option 1. print("Upload the file you wish to encrypt: ")
-    #Option 2. CyberBuddy.py examplefile.txt
-
-print("File uploaded successfully!\n")
-print("Would you like to create a new encryption key or use an existing one?")
-encryption_key_selection = input(print("Would you like to create a new encryption key or use an existing one?\nEnter 1 to create a new key or 2 to use an existing key"))
-#User chooses to create a new encryption key or use an existing one
-if encryption_key_selection == 1 or "Yes" or "yes" or "YES" or "y" or "Y" or "1" or "True" or "true":
-    #Generating a key
-    key = Fernet.generate_key()
-    print(key)
-elif encryption_key_selection == 2 or "No" or "no" or "NO" or "n" or "N" or "nO" or "2" or "False" or "false":
-    #User inputs the key
-    key = input(print("Enter the key: "))
+#Considerations:
+#1. What encryption algorithm to use?
+#2. What key to use?
+#3. What file to encrypt?
+#4. Where to save the encrypted file?  
+#5. Implementing Padding
+#6. Implementing Mode of Operation
+#7. Implementing Initialization Vector
+#8. Implementing Key Derivation Function
+#9. Implementing Key Exchange
     
-    #
-    
-    
-#Prompt the user to download the file
-download_key_selection = input(print("Would you like to download the key to a file?\n Enter 1 or yes to download the key, or 2 or no to not download the key"))
-#User chooses if they want to download the key to a file
-if download_key_selection == 1 or "Yes" or "yes" or "YES" or "y" or "Y" or "1" or "True" or "true":
-    #Prompt the user to name the file and downloads in the current directory, if the user enters nothing, it names the fle encryption_key.txt
-    input("What would you like to name the key file? ")
-    if input == "":
-        with open("encryption_key.txt", "w") as file:
-            file.write("Encryption_Key")
-    else: 
-        with open(input, "w") as file:
-            file.write("Encryption_Key")
-elif download_key_selection == 2 or "No" or "no" or "NO" or "n" or "N" or "nO" or "2" or "False" or "false":
-    print("Key not downloaded")
-else:
-    print("Enter the correct answer or else.")
+def load_file():
+    # Load the file from the current directory in read-only
+    file_name = input("What is the file to load from the current directory: ")
+    file_data = open(file_name, "rb").read()
+    return file_data, file_name
 
+def encrypt_aes(file_data, file_name): 
+    # AES encryption using Fernet
+    
+    user_input = input("Do you have a key to use? (Y/N): ")
+    if user_input in ["Y", "y", "Yes", "yes"]:
+        # Load the key from the current directory in read-only
+        key_input = input("Enter the key") 
+        key = open(key_input, "rb").read() 
+        
+    elif user_input in ["N", "n", "No", "no"]:
+        # Generate a key for AES and save it to a file
+        key = Fernet.generate_key()
+        with open("aes_key.key", "wb") as key_file:
+            key_file.write(key)
+    
+    # Encrypting the data using a key with Fernet
+    fernet = Fernet(key)
+    encrypted_data = fernet.encrypt(file_data)
+    
+    # Encrypt the file
+    with open(file_name, "wb") as encrypted_file:
+        encrypted_file.write(encrypted_data)
+    print("File created and written successfully!")
+
+def encrypt_rsa():
+    # RSA encryption using
+    pass
+
+def __main__():
+    file_data, file = load_file()
+    # Load the file from the current directory to be used against an encryption algorithm
+    
+    #If user choice is AES, then encrypt the file with encrypt_aes
+    encrypt_aes(file_data, file)
+    
+__main__()
+#run the program
