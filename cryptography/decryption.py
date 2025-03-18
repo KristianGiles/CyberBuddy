@@ -7,22 +7,22 @@ print("   *     \\_/     *   ")
 print("   *             *   ")
 print("    *           *    ")
 print("      *       *      ")
-print("        *****       ")
-print("     \/       \\/      ")
-print("     /         \\     ")
-print("     \_________/    ")
-print("       |     |        ")
+print("        *****        ")
+print("      /       \\      ")
+print("     / WELCOME \\     ")
+print("    /___________\\    ")
+
 print("\nWelcome to CyberBuddy's File Decryption Program!\n")
 
 def load_file():
     # Load the file from the current directory in read-only
-    file_name = input("What is the file to load from the current directory: ")
+    file_name = input("Enter the file you wish to decrypt: ")
     file_data = open(file_name, "rb").read()
     return file_data, file_name
 
 def load_key():
     # Load the key from the current directory in read-only
-    key_name= input("What is the key to load from the current directory: ")
+    key_name = input("Enter the name of they key: ") 
     key = open(key_name, "rb").read()
     return key
     
