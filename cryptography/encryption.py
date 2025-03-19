@@ -24,26 +24,20 @@ def load_file():
 
 def load_key():
     # Load the key from the current directory in read-only
-    key_name = input("Enter the name of they key: ") 
+    key_name = input("Enter the name of the encryption key you wish to use: ") 
     key = open(key_name, "rb").read() 
+    return key
+
+def generate_key_aes():
+    # Generate a key for AES and save it to a file
+    key = Fernet.generate_key()
+    with open("aes_key.key", "wb") as key_file:
+        key_file.write(key)
     return key
 
 def encrypt_aes(file_data, file_name): 
     # AES encryption using Fernet
     
-    user_input = input("Do you have a key to use? (Y/N): ")
-    if user_input in ["Y", "y", "Yes", "yes"]:
-        # Load the key from the key function
-        key = load_key()
-        
-    elif user_input in ["N", "n", "No", "no"]:
-        # Generate a key for AES and save it to a file
-        key = Fernet.generate_key()
-        with open("aes_key.key", "wb") as key_file:
-            key_file.write(key)
-    else:
-        print("Invalid input. Please try again.")
-        encrypt_aes(file_data, file_name)
     # Encrypting the data using a key
     fernet = Fernet(key)
     encrypted_data = fernet.encrypt(file_data)
@@ -78,11 +72,36 @@ def encrypt_ecc():
     pass
 
 def __main__():
+    print("What encryption algorithm would you like to use?")
+    print("1. AES")
+    print("2. Triple DES")
+    print("3. RSA")
+    print("4. ECC")
+    user_choice = input("Enter the number of the encryption algorithm you wish to use: ")
+
     file_data, file = load_file()
     # Load the file from the current directory to be used against an encryption algorithm
-    
-    #If user choice is AES, then encrypt the file with encrypt_aes
-    encrypt_aes(file_data, file)
-    
+
+    while True:
+    # Loop the prompt until a valid input is given
+        user_input = input("Do you have a key to use? (Y/N): ")
+        if user_input in ["Y", "y", "Yes", "yes"]:
+            #Load the key from the key function if the user has a key
+            key = load_key()
+            break
+        elif user_input in ["N", "n", "No", "no"]:
+            # Generate a key if the user does not have one. The key is based on the encryption algorithm chosen at the start
+            if user_choice == "1":
+                key = generate_key_aes()
+            elif user_choice == "2":
+                key = encrypt_tripledes()
+            elif user_choice == "3":
+                key = encrypt_rsa()
+            elif user_choice == "4":
+                key = encrypt_ecc()
+            break
+        else:
+            print("Invalid input. Please enter 'Y' or 'N'.")
+
 __main__()
 #run the program
