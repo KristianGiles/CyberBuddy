@@ -1,12 +1,12 @@
 ## Authors: Kristian Giles & Caleb Prince
 ## Start Date: 16/03/2025
 ## Last Update: 17/03/2025
-## Version Number: 0.3
+## Version Number: 0.4
 
 import argparse
 import getpass
 
-from cryptography.password_manager import get_creds, try_connect
+from crypto.password_manager import get_creds, try_connect
 
 #Initialising parser
 parser = argparse.ArgumentParser(
@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(
 )
 
 #Initialising arguments
-parser.add_argument('-p', '--port', help='Starts up the port scanner, scanning on the specified IP Address, if no IP Address is specified it will scan on your local IP Address, the results of this scan are then outputted.')
+parser.add_argument('-p', '--port', default='localhost', help='Starts up the port scanner, scanning on the specified IP Address, if no IP Address is specified it will scan on your local IP Address, the results of this scan are then outputted.')
 parser.add_argument('-i', '--ids', help='Starts up the IDS which will monitor network traffic and alert on suspicious behaviour in perpetuity until stopped.')
 parser.add_argument('-s', '--sniffer', help='Starts up a packet sniffer which will analyse flowing packets.')
 parser.add_argument('-e', '--encryption', help='Requires an encryption algorithm to be specified, currently supported algorithms TBD')
