@@ -1,4 +1,7 @@
-from cryptography.fernet import Fernet #pip3 install cryptography
+from cryptography.fernet import Fernet # pip3 install cryptography
+from Crypto.Cipher import DES3 # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
+from Crypto.Util.Padding import pad, unpad
+import os
 
 print("        *****        ")
 print("      *       *      ")
@@ -26,11 +29,8 @@ def load_key():
     key = open(key_name, "rb").read()
     return key
     
-def decrypt_aes(file_data, file_name):
-    # AES decryption using Fernet
-    key = load_key()
+def decrypt_aes(file_data, file_name, key): # AES decryption using Fernet
     f = Fernet(key)
-    
     # decrypt data
     decrypted_data = f.decrypt(file_data)
     # write the original file
@@ -39,8 +39,17 @@ def decrypt_aes(file_data, file_name):
     
     print("File decrypted successfully!")
     
+def decrypt_tripledes(file_data, file_name, key):
+    decipher = DES3.new(key, DES3.MODE_ECB)
+    decrypted_padded = decipher.decrypt(file_data)
+    decrypted_data = unpad(decrypted_padded, 8)
+    with open(file_name, "wb") as file:
+        file.write(decrypted_data)
+    print("File decrypted successfully!")
+    
 def __main__():
     file_data, file = load_file()
-    decrypt_aes(file_data, file)
+    key = load_key()
+    decrypt_tripledes(file_data, file, key)
     
 __main__()
