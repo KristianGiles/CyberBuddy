@@ -47,9 +47,33 @@ def decrypt_tripledes(file_data, file_name, key):
         file.write(decrypted_data)
     print("File decrypted successfully!")
     
+def decrypt_rsa():
+    pass
+
+def decrypt_ecc():
+    pass
+
 def __main__():
-    file_data, file = load_file()
+    print("What decryption algorithm would you like to use?")
+    print("1. AES")
+    print("2. Triple DES")
+    print("3. RSA")
+    print("4. ECC")
+    user_choice = input("Enter the number of the decryption algorithm you wish to use: ")
+    
+    #Load the file and key
+    file_data, file_name = load_file()
     key = load_key()
-    decrypt_tripledes(file_data, file, key)
+    
+    if user_choice == "1":
+        decrypt_aes(file_data, file_name, key)
+    elif user_choice == "2":
+        decrypt_tripledes(file_data, file_name, key)
+    elif user_choice == "3":
+        decrypt_rsa()
+    elif user_choice == "4":
+        decrypt_ecc()
+    else:
+        print("Invalid input. Please try again.")
     
 __main__()
