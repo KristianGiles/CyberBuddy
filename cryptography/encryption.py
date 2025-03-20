@@ -31,7 +31,6 @@ def load_key(): #Loads the key from the current directory in read-only
 def load_public_key_rsa(): # Load the public key from the current directory in read-only
     key_input = input("Enter the name of the public key you wish to use: ") 
     with open(key_input, "rb") as public_file:
-        print(public_file)
         # Imports the key to a readable format
         public_key = RSA.import_key(public_file.read())
     return public_key
