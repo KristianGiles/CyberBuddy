@@ -1,3 +1,5 @@
 argparse
 pytest
 psycopg2
+cryptography
+pycryptodome
