@@ -1,13 +1,7 @@
-<<<<<<< HEAD:cryptography/decryption.py
 from cryptography.fernet import Fernet # pip3 install cryptography
 from Crypto.Cipher import DES3, PKCS1_OAEP # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
 from Crypto.Util.Padding import unpad
 from Crypto.PublicKey import RSA 
-=======
-from cryptography.fernet import Fernet 
-from Crypto.Cipher import DES3 
-from Crypto.Util.Padding import pad, unpad
->>>>>>> efa6e218b925b4d6d3abbd8e0bc756b8f325d85c:crypto/decryption.py
 import os
 
 print("        *****        ")
