@@ -1,3 +1,6 @@
+# CyberBuddy encryption encrypts a file using AES, Triple DES, RSA, or ECC
+# Version: 0.4
+
 from cryptography.fernet import Fernet # pip3 install cryptography
 from Crypto.Cipher import DES3, PKCS1_OAEP # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
 from Crypto.Util.Padding import pad
