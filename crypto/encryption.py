@@ -1,10 +1,10 @@
 # CyberBuddy encryption encrypts a file using AES, Triple DES, RSA, or ECC
-# Version: 0.4
+# Version: 0.5
 
 from cryptography.fernet import Fernet # pip3 install cryptography
 from Crypto.Cipher import DES3, PKCS1_OAEP # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
 from Crypto.Util.Padding import pad
-from Crypto.PublicKey import RSA 
+from Crypto.PublicKey import RSA, ECC 
 import os
 
 print("        *****        ")
@@ -32,11 +32,13 @@ def load_key(): #Loads the key from the current directory in read-only
     return key
 
 def load_public_key_rsa(): # Load the public key from the current directory in read-only
-    key_input = input("Enter the name of the public key you wish to use: ") 
+    key_input = input("Enter the name of the public key you wish to use: ")
     with open(key_input, "rb") as public_file:
         # Imports the key to a readable format
         public_key = RSA.import_key(public_file.read())
-    return public_key
+        
+    key = open(key_input, "rb").read() 
+    return key
 
 def generate_key_aes(): # Generate a key for AES and save it to a file
     # Generate a key for AES
@@ -87,7 +89,7 @@ def generate_keys_rsa(): # Generate a private and public key for RSA and save th
     # Createing the public key from the key
     public_key = key.public_key()
     # Exports the public key to the correct format
-    writeable_public_key = key.public_key().export_key()
+    writeable_public_key = public_key.export_key()
     with open("rsa_public_key.pem", "wb") as public_key_file:
         public_key_file.write(writeable_public_key)
     return public_key
@@ -102,20 +104,11 @@ def encrypt_rsa(file_data, file_name, public_key): # RSA encryption using PKCS1_
         encrypted_file.write(encrypted_data)
     print("File encrypted successfully!")
     
-def encrypt_ecc():
-    # Elliptic Curve Cryptography encryption
-    pass
-
-def generate_key_ecc():
-    # Elliptic Curve Cryptography key generation
-    pass
-
 def __main__():
     print("What encryption algorithm would you like to use?")
     print("1. AES")
     print("2. Triple DES")
     print("3. RSA")
-    print("4. ECC")
     user_choice = input("Enter the number of the encryption algorithm you wish to use: ")
     file_data, file_name = load_file()
     # Load the file from the current directory to be used against an encryption algorithm
@@ -129,10 +122,6 @@ def __main__():
                 key = load_key()
             elif user_choice == "3":
                 key = load_public_key_rsa()
-            elif user_choice == "4":
-                pass
-            else:
-                print("Invalid input. Please try again.")
             break
         elif user_input in ["N", "n", "No", "no"]:
             # Generate a key if the user does not have one. The key is based on the encryption algorithm chosen at the start
@@ -142,8 +131,6 @@ def __main__():
                 key = generate_key_tripledes()
             elif user_choice == "3":
                 key = generate_keys_rsa()
-            elif user_choice == "4":
-                key = generate_key_ecc()
             break
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
@@ -154,8 +141,6 @@ def __main__():
         encrypt_tripledes(file_data, file_name, key)
     elif user_choice == "3":
         encrypt_rsa(file_data, file_name, key)
-    elif user_choice == "4":
-        encrypt_ecc()
     else:
         print("Invalid input. Please try again.")
         

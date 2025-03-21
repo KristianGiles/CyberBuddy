@@ -73,7 +73,6 @@ def __main__():
     print("1. AES")
     print("2. Triple DES")
     print("3. RSA")
-    print("4. ECC")
     user_choice = input("Enter the number of the decryption algorithm you wish to use: ")
     
     # Load the file and key
@@ -89,8 +88,6 @@ def __main__():
     elif user_choice == "3":
         private_key = load_private_key()
         decrypt_rsa(file_data, file_name, private_key)
-    elif user_choice == "4":
-        decrypt_ecc()
     else:
         print("Invalid input. Please try again.")
     
