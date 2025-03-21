@@ -4,7 +4,7 @@
 from cryptography.fernet import Fernet # pip3 install cryptography
 from Crypto.Cipher import DES3, PKCS1_OAEP # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
 from Crypto.Util.Padding import pad
-from Crypto.PublicKey import RSA, ECC 
+from Crypto.PublicKey import RSA
 import os
 
 print("        *****        ")
@@ -36,9 +36,7 @@ def load_public_key_rsa(): # Load the public key from the current directory in r
     with open(key_input, "rb") as public_file:
         # Imports the key to a readable format
         public_key = RSA.import_key(public_file.read())
-        
-    key = open(key_input, "rb").read() 
-    return key
+    return public_key
 
 def generate_key_aes(): # Generate a key for AES and save it to a file
     # Generate a key for AES

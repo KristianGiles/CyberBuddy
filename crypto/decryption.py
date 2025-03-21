@@ -1,5 +1,5 @@
 # CyberBuddy decryption decrypts a files using AES, Triple DES, RSA, and ECC.
-# Version: 0.4
+# Version: 0.5
 
 from cryptography.fernet import Fernet # pip3 install cryptography
 from Crypto.Cipher import DES3, PKCS1_OAEP # pip3 install pycryptodome or python3 -m pip install --upgrade --no-cache-dir pycryptodome
@@ -64,9 +64,6 @@ def decrypt_rsa(file_data, file_name, private_key):
     with open(file_name, "wb") as decrypted_file:
         decrypted_file.write(decrypted_data)
     print("File decrypted successfully!")
-
-def decrypt_ecc():
-    pass
 
 def __main__():
     print("What decryption algorithm would you like to use?")
